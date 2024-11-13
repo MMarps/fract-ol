@@ -6,7 +6,7 @@
 /*   By: mmarpaul <mmarpaul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:53:10 by mmarpaul          #+#    #+#             */
-/*   Updated: 2024/11/13 19:44:00 by mmarpaul         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:47:55 by mmarpaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_error_args(void)
 	ft_printf("	$>./fractol \"burning_ship\"\n\n");
 }
 
-void	print_instruct(void)
+void	print_menu(void)
 {
 	ft_printf("\n\t\t<< Fract-ol >>\n\n");
 	ft_printf("  #Launch program:\n\n");

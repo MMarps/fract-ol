@@ -6,7 +6,7 @@
 /*   By: mmarpaul <mmarpaul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:52:57 by mmarpaul          #+#    #+#             */
-/*   Updated: 2024/11/13 19:03:30 by mmarpaul         ###   ########.fr       */
+/*   Updated: 2024/11/13 22:26:37 by mmarpaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # define JULIA 1
 # define BURNING_SHIP 2
 
-# define HEIGHT 1600
-# define WIDTH 1600
+# define HEIGHT 1080
+# define WIDTH 1920
 
 # define M_PI 3.14159265358979323846
 
@@ -55,7 +55,7 @@ typedef struct s_color
 	double	phase_g;
 	double	phase_b;
 	double	shift;
-}					t_color;
+}			t_color;
 
 typedef struct s_data
 {
@@ -65,7 +65,7 @@ typedef struct s_data
 	double		zoom;
 	t_complex	julia;
 	t_color		rgb;
-}			t_data;
+}				t_data;
 
 typedef struct s_mlx
 {
@@ -77,10 +77,7 @@ typedef struct s_mlx
 }			t_mlx;
 
 // Maths utils
-double	scale(double unscaled_num,
-			double new_min,
-			double new_max,
-			double old_max);
+double	scale(double unscaled_num, double new_min, double new_max);
 t_complex	abs_complex(t_complex c);
 t_complex	square_complex(t_complex c);
 t_complex	sum_complex(t_complex a, t_complex b);
@@ -90,7 +87,7 @@ int	close_win(t_mlx *mlx);
 void	hooks(t_mlx mlx);
 
 // Utils
-void	print_instruct(void);
+void	print_menu(void);
 void	print_error_args(void);
 bool	check_input(int argc, char *argv[], t_mlx *mlx);
 void	error_malloc(t_mlx *mlx, char *msg);

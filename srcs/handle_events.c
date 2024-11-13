@@ -6,7 +6,7 @@
 /*   By: mmarpaul <mmarpaul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 22:37:08 by mmarpaul          #+#    #+#             */
-/*   Updated: 2024/11/13 19:47:08 by mmarpaul         ###   ########.fr       */
+/*   Updated: 2024/11/13 21:54:49 by mmarpaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,35 @@ void	change_colors(t_color *rgb, int keysym)
 	}
 }
 
-int	key_handler(int keysym, t_mlx *mlx)
+void	moove_picture(int keysym, t_mlx *mlx)
 {
-	if (keysym == XK_Escape)
-		close_win(mlx);
-	else if (keysym == XK_Up)
-		mlx->param->shift_y += (0.5 * mlx->param->zoom);
+	if (keysym == XK_Up)
+	{
+		if (mlx->fractal != BURNING_SHIP)
+			mlx->param->shift_y += (0.5 * mlx->param->zoom);
+		else
+			mlx->param->shift_y -= (0.5 * mlx->param->zoom);
+	}
 	else if (keysym == XK_Down)
-		mlx->param->shift_y -= (0.5 * mlx->param->zoom);
+	{
+		if (mlx->fractal != BURNING_SHIP)
+			mlx->param->shift_y -= (0.5 * mlx->param->zoom);
+		else
+			mlx->param->shift_y += (0.5 * mlx->param->zoom);
+	}
 	else if (keysym == XK_Left)
 		mlx->param->shift_x -= (0.5 * mlx->param->zoom);
 	else if (keysym == XK_Right)
 		mlx->param->shift_x += (0.5 * mlx->param->zoom);
+}
+
+int	key_handler(int keysym, t_mlx *mlx)
+{
+	if (keysym == XK_Escape)
+		close_win(mlx);
+	else if (keysym == XK_Up || keysym == XK_Down
+			|| keysym == XK_Left || keysym == XK_Right)
+		moove_picture(keysym, mlx);
 	else if (keysym == XK_equal || keysym == XK_minus)
 		change_iterations(mlx, keysym);
 	else if (keysym == XK_KP_Add)
@@ -100,15 +117,15 @@ void	change_zoom(int button, int x, int y, t_data *param)
 	double	zoom_factor;
 
 	zoom_factor = 1.0;
-	mouse_x = scale(x, -2, 2, WIDTH) * param->zoom + param->shift_x;
-	mouse_y = scale(y, 2, -2, HEIGHT) * param->zoom + param->shift_y;
+	mouse_x = scale(x, -2, 2) * param->zoom + param->shift_x;
+	mouse_y = scale(y, 2, -2) * param->zoom + param->shift_y;
 	if (button == Button5)
 		zoom_factor = 0.8;
 	else if (button == Button4)
 		zoom_factor = 1.2;
 	param->zoom *= zoom_factor;
-	param->shift_x = mouse_x - scale(x, -2, 2, WIDTH) * param->zoom;
-	param->shift_y = mouse_y - scale(y, 2, -2, HEIGHT) * param->zoom;
+	param->shift_x = mouse_x - scale(x, -2, 2) * param->zoom;
+	param->shift_y = mouse_y - scale(y, 2, -2) * param->zoom;
 }
 
 int	mouse_handler(int button, int x, int y, t_mlx *mlx)
@@ -118,8 +135,8 @@ int	mouse_handler(int button, int x, int y, t_mlx *mlx)
 	double	zoom_factor;
 
 	zoom_factor = 1.0;
-	mouse_x = scale(x, -2, 2, WIDTH);
-	mouse_y = scale(y, 2, -2, HEIGHT);
+	mouse_x = scale(x, -2, 2);
+	mouse_y = scale(y, 2, -2);
 	if (button == Button5 || button == Button4)
 		change_zoom(button, x, y, mlx->param);
 	else if (button == Button1 && mlx->fractal == JULIA)

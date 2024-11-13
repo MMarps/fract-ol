@@ -6,7 +6,7 @@
 /*   By: mmarpaul <mmarpaul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 18:57:20 by mmarpaul          #+#    #+#             */
-/*   Updated: 2024/11/13 19:03:40 by mmarpaul         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:47:57 by mmarpaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	main(int argc, char *argv[])
 		mlx.param->julia.x = ft_atod(argv[2]);
 		mlx.param->julia.i = ft_atod(argv[3]);
 	}
-	print_instruct();
+	print_menu();
 	fractol_render(&mlx);
 	hooks(mlx);
 	mlx_loop(mlx.mlx_ptr);
